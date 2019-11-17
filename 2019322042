@@ -1,0 +1,45 @@
+package dd;
+
+import java.util.Scanner;
+
+
+public class Test1 {
+    public static void main(String[] args) {
+        //源数据
+        char[] resource = args[0].toCharArray();
+        StringBuilder result = new StringBuilder();
+        //当前下标
+        int currentIndex = 0;
+        //处理标点
+        boolean isChange = false;
+        //需要查询的字符
+        char query;
+
+        for (char c : resource) {
+            if(++currentIndex % 8 == 0){
+                result.append(isChange ? "。\n" : "，");
+                isChange = !isChange;
+                continue;
+            }
+            result.append(c);
+        }
+        result.append("。<未完，待续>");
+        //打印排版结果
+        System.out.println(result.toString());
+
+        System.out.println("请输入需要查询的字符：");
+        query = new Scanner(System.in).next().charAt(0);
+
+        System.out.printf("‘%c’出现了  %d  次" ,query,characterCount(resource,query));
+
+
+    }
+
+    private static int characterCount(char[] arr, char query){
+        int result = 0;
+        for (char c : arr) {
+            if(c == query) result++;
+        }
+        return result;
+    }
+}
